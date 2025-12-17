@@ -29,7 +29,7 @@ class Rob6323Go2EnvCfg(DirectRLEnvCfg):
     action_scale = 0.25
     action_space = 12
     # reward scales
-    action_rate_reward_scale = -0.01
+    
     observation_space = 48
     state_space = 0
     debug_vis = True
@@ -40,8 +40,16 @@ class Rob6323Go2EnvCfg(DirectRLEnvCfg):
     torque_limits = 100.0  # Max torque limits for the joints
     
     # reward scales
-    lin_vel_reward_scale = 2.0
-    yaw_rate_reward_scale = 1.0
+    lin_vel_reward_scale = 3.0
+    yaw_rate_reward_scale = 1.5
+    action_rate_reward_scale = -0.03
+    raibert_heuristic_reward_scale = -2.0
+    orient_reward_scale = -2.0
+    lin_vel_z_reward_scale = -0.06
+    dof_vel_reward_scale = -0.0002
+    ang_vel_xy_reward_scale = -0.006
+    feet_clearance_reward_scale = -2.0
+    tracking_contacts_shaped_force_reward_scale = 6.0
     
     #PART3 : threshold for termination
     base_height_min = 0.20  # Terminate if base is lower than 20cm
@@ -49,16 +57,16 @@ class Rob6323Go2EnvCfg(DirectRLEnvCfg):
     #part 4
     observation_space = 48 + 4  # Added 4 for clock inputs
 
-    raibert_heuristic_reward_scale = -1.0
-    feet_clearance_reward_scale = -1.0
-    tracking_contacts_shaped_force_reward_scale = 4.0
+    
+    
+    
     
     #part 5
     # Additional reward scales
-    orient_reward_scale = -1.0
-    lin_vel_z_reward_scale = -0.02
-    dof_vel_reward_scale = -0.0001
-    ang_vel_xy_reward_scale = -0.001
+    
+    
+    
+    
     
     #part6
     tracking_contacts_shaped_force_reward_scale = 4.0

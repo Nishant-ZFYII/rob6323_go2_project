@@ -88,6 +88,7 @@ class Rob6323Go2Env(DirectRLEnv):
             id_list, _ = self._contact_sensor.find_bodies(name)
             self._feet_ids_sensor.append(id_list[0])
         # Be sure to store these! You will need them for the force reward.
+        
 
         # Variables needed for the raibert heuristic
         self.gait_indices = torch.zeros(self.num_envs, dtype=torch.float, device=self.device, requires_grad=False)
