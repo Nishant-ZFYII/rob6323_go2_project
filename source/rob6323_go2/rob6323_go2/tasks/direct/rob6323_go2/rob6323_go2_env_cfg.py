@@ -52,16 +52,16 @@ class Rob6323Go2EnvCfg(DirectRLEnvCfg):
     
     #tunable reward scale
     #part1
-    lin_vel_reward_scale = 2.0
-    yaw_rate_reward_scale = 1.0
+    lin_vel_reward_scale = 5.0
+    yaw_rate_reward_scale = 5.5
     action_rate_reward_scale = -0.1
-    raibert_heuristic_reward_scale = -4.5
-    orient_reward_scale = -5.5
-    lin_vel_z_reward_scale = -2.05
-    dof_vel_reward_scale = -0.0005
-    ang_vel_xy_reward_scale = -0.1
-    feet_clearance_reward_scale = -10.5
-    tracking_contacts_shaped_force_reward_scale = 5.0
+    raibert_heuristic_reward_scale = -5.0
+    orient_reward_scale = -0.0
+    lin_vel_z_reward_scale = -0.05
+    dof_vel_reward_scale = -0.0001
+    ang_vel_xy_reward_scale = -0.001
+    feet_clearance_reward_scale = -30.5
+    tracking_contacts_shaped_force_reward_scale = 4.0
     
 
     # simulation
@@ -122,7 +122,7 @@ class Rob6323Go2EnvCfg(DirectRLEnvCfg):
     # scene
     #reducing num_envs to reduce processing time. 
     
-    scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=4096, env_spacing=4.0, replicate_physics=True)
+    scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=256, env_spacing=4.0, replicate_physics=True)
     contact_sensor: ContactSensorCfg = ContactSensorCfg(
         prim_path="/World/envs/env_.*/Robot/.*", history_length=3, update_period=0.005, track_air_time=True
     )
