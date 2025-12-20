@@ -235,7 +235,7 @@ tensorboard --logdir=logs
 ---
 
 ## Results: Plots and Videos
-**1. Smoothened walking and trouting
+**1. Smoothened walking and trouting**
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
 
@@ -243,12 +243,12 @@ This is the baseline results as given from the tutorials.
 
 ![if we want to link vid](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
 
-**2. Trouting with Friction 
+**2. Trouting with Friction**
 ![Terrain](docs/img/burst_squeue_example.png)
 
 ![Terrain](docs/terrain_best.gif)
 
-**3. Rough Terrain
+**3. Rough Terrain**
 ![Terrain](docs/img/burst_squeue_example.png)
 
 ![Terrain](docs/terrain_best.gif)
