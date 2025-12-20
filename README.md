@@ -170,41 +170,27 @@ Students should only edit README.md below this line.
 3 sets of 4 plots
 video 
 
-# ROB6323 Go2 Locomotion Project (Isaac Lab)
+# ROB6323 Go2 Locomotion Project (Isaac Lab): Results
 
-Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping + low-level control changes and multiple experiment scenarios (flat + terrain).
+Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping and low-level control changes and multiple experiment scenarios (flat and terrain).
 
 ## Team Members
-- Vivek Mattam
-- Nishant Jhunjunwala
+Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
 
 ---
 
-## Repo Philosophy (Important)
-This repo is intentionally “config-driven”:
-
-- **Only two Python files are edited across experiments**
-  - `rob6323_go2_env.py`
-  - `rob6323_go2_env_cfg.py`
-
-All changes (rewards, observation additions, termination logic, PD control, Raibert heuristic, terrain sensing, etc.) are implemented by iterating on these two files.
-
+## Repo Understanding
 - **Each scenario has its own training scripts**
-  - We maintain separate `train.sh` and `train.slurm` for each scenario because each scenario expects different parameters and/or different versions of the env/config.
-  - This avoids accidentally launching a job with mismatched reward scales, observations, or terrain settings.
+  - We maintain separate `train.sh` and `train.slurm` for each scenario because each scenario expects different parameters and different versions of the env and config files.
 
-> **Rule of thumb:** pick a scenario → use that scenario’s `rob6323_go2_env*.py` + its `train.sh/train.slurm` → train → log → plots/videos.
+> **Rule of thumb:**
+>   pick a scenario
+>   use that scenario’s `rob6323_go2_env*.py` and that are called in its `train.sh/train.slurm`
+>   train 
+>   log 
+>     videos
+>     tensorboard for plots
 
----
-
-## Branch Structure
-
-| Branch | Description |
-|--------|-------------|
-| `master` | Base implementation |
-| `vivek` | Parts 1–6 + **Bonus friction model** |
-| `Test_1` | Fine-tuned parameters for flat terrain |
-| `Terrain` | Rough terrain configuration |
 
 ---
 
@@ -310,21 +296,14 @@ Randomization:
 | `feet_clearance_reward_scale` | -10.5 |
 | `tracking_contacts_shaped_force_reward_scale` | 5.0 |
 
----
 
-# How to Run (3 Procedures)
+--
 
-Below are **three distinct run procedures** with **path placeholders**.  
-Replace placeholders like `<NETID>`, `<REPO_ROOT>`, `<SCENARIO>`, `<JOB_ID>`, `<LOG_DIR>`.
+## Results: Plots and Videos
+This is the baseline results as given from the tutorials.
+![Baseline](docs/img/burst_squeue_example.png)
+[![Baseline][(https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)]
 
----
 
-## Procedure A — Local Run (Quick sanity checks)
-Use this for short debug runs (small steps, quick verify env works).
-
-### 1) Clone + enter repo
-```bash
-git clone git@github.com:Nishant-ZFYII/rob6323_go2_project.git
-cd <REPO_ROOT>/rob6323_go2_project
 
 
