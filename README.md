@@ -302,9 +302,9 @@ Randomization:
 ## Results: Plots and Videos
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
-<video width="640" controls>
-  <source src="https://drive.google.com/uc?id=1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8" type="video/mp4">
-</video>
+## Policy Rollout Video (Flat Terrain)
+
+[![Go2 Locomotion Video](results/videos/flat_walk_thumbnail.png)](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view)
 
 
 [![Baseline](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
