@@ -166,9 +166,7 @@ The suggested way to inspect these logs is via the Open OnDemand web interface:
 ---
 Students should only edit README.md below this line.
 
-3 different things how to run what are paths and steps
-3 sets of 4 plots
-video 
+---
 
 # ROB6323 Go2 Locomotion Project (Isaac Lab): Results
 
@@ -184,36 +182,41 @@ Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
 -
 
 ---
-
-## Repo Understanding
-- **Each scenario has its own training scripts**
-  - We maintain separate `train.sh` and `train.slurm` for each scenario because each scenario expects different parameters and different versions of the env and config files.
-
-> **Rule of thumb:**
->   pick a scenario
->   use that scenario’s `rob6323_go2_env.py` and `rob6323_go2_env_cfg.py` that are called in its `train.sh/train.slurm`
->   train 
->   log 
->     videos
->     tensorboard for plots
-
----
-## How to reproduce
-A. Clone and Setup
+## Running the model
+**A. Prerequisites: Clone and Setup**
 ```
+cd $HOME
 git clone git@github.com:Nishant-ZFYII/rob6323_go2_project.git
+```
+**B. Install environment**
+```
+cd $HOME/rob6323_go2_project
+./install.sh
+```
+**C. Launch Training**
+```
 cd rob6323_go2_project
 git checkout master
 ```
+  **(i) Flat terrain**
+  ```
+./train_flat_terrain.sh
+```
+  **(ii) Flat terrain with friction**
+    ```
+  ./train_flat_terrain_fric.sh
+    ```
+  **(iii) Rough Terrain**
+    ```
+  ./train_rough_terrain.sh
+    ```
 
-B. Train on Greene HPC
+Train on Greene HPC
 ```./train.sh```
+Checkout job status ```ssh burst "squeue -u $USER"```
 
-C. View Results
-```
-rsync -avz user@greene:˜/rob6323_go2_project/logs/<JOB_ID>/ ./logs/<JOB_ID>/
-tensorboard --logdir=logs
-```
+**D. View Results**
+Refer to above instructions.
 ---
 
 ## Best Hyperparameters
@@ -235,22 +238,21 @@ tensorboard --logdir=logs
 ---
 
 ## Results: Plots and Videos
-**1. Smoothened walking and trouting**
+**1. Smoothened walking and trotting**
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
 
 ![Baseline](docs/baseline.gif)
 
-![if we want to link vid](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
 
-**2. Trouting with Friction**
-![Terrain](docs/img/burst_squeue_example.png)
+**2. Trotting with Friction**
+![Friction](docs/img/burst_squeue_example.png)
 
-![Terrain](docs/terrain_best.gif)
+![Friction](docs/terrain_best.gif)
 
 **3. Rough Terrain**
-![Terrain](docs/img/burst_squeue_example.png)
+![Rough Terrain](docs/img/burst_squeue_example.png)
 
-![Terrain](docs/terrain_best.gif)
+![Rough Terrain](docs/terrain_best.gif)
 
 
