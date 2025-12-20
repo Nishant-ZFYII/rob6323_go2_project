@@ -237,8 +237,12 @@ View results using instructions given above.
 ---
 
 ## Results: Plots and Videos
+Training Policies
 ![Training Policies](docs/training_policies.png)
+
+Rough Terrain
 ![Rough Terrain](docs/rough_terrain.png)
+
 **1. Smooth trotting**
 
 This is the baseline results as given from the tutorials.
