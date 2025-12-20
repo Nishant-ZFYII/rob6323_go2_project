@@ -165,3 +165,166 @@ The suggested way to inspect these logs is via the Open OnDemand web interface:
 
 ---
 Students should only edit README.md below this line.
+
+3 different things how to run what are paths and steps
+3 sets of 4 plots
+video 
+
+# ROB6323 Go2 Locomotion Project (Isaac Lab)
+
+Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping + low-level control changes and multiple experiment scenarios (flat + terrain).
+
+## Team Members
+- Vivek Mattam
+- Nishant Jhunjunwala
+
+---
+
+## Repo Philosophy (Important)
+This repo is intentionally “config-driven”:
+
+- **Only two Python files are edited across experiments**
+  - `rob6323_go2_env.py`
+  - `rob6323_go2_env_cfg.py`
+
+All changes (rewards, observation additions, termination logic, PD control, Raibert heuristic, terrain sensing, etc.) are implemented by iterating on these two files.
+
+- **Each scenario has its own training scripts**
+  - We maintain separate `train.sh` and `train.slurm` for each scenario because each scenario expects different parameters and/or different versions of the env/config.
+  - This avoids accidentally launching a job with mismatched reward scales, observations, or terrain settings.
+
+> **Rule of thumb:** pick a scenario → use that scenario’s `rob6323_go2_env*.py` + its `train.sh/train.slurm` → train → log → plots/videos.
+
+---
+
+## Branch Structure
+
+| Branch | Description |
+|--------|-------------|
+| `master` | Base implementation |
+| `vivek` | Parts 1–6 + **Bonus friction model** |
+| `Test_1` | Fine-tuned parameters for flat terrain |
+| `Terrain` | Rough terrain configuration |
+
+---
+
+## Major Changes (What we implemented)
+
+### Part 1 — Action Rate Penalties (Smoother Actions)
+**File:** `rob6323_go2_env.py`  
+**Why:** Penalize jerky motions for smoother locomotion.  
+**Change:** Added first + second derivative action penalties using a 3-step action history.
+
+\[
+r_{\text{action\_rate}}=\sum (a_t-a_{t-1})^2 + \sum (a_t-2a_{t-1}+a_{t-2})^2
+\]
+
+---
+
+### Part 2 — Low-Level PD Controller (Explicit Torque Control)
+**Files:** `rob6323_go2_env.py`, `rob6323_go2_env_cfg.py`  
+**Why:** Replace implicit actuator with explicit torque control (better sim-to-real).  
+**Change:** PD controller with `Kp=20.0`, `Kd=0.5`.
+
+\[
+\tau = K_p(q_{des}-q) - K_d \dot{q}
+\]
+
+---
+
+### Part 3 — Early Stopping (Fall Termination)
+**File:** `rob6323_go2_env.py`  
+**Why:** End episodes early when the robot falls to speed learning.  
+**Change:** Added base height termination at **0.20 m**.
+
+---
+
+### Part 4 — Raibert Heuristic (Gait Shaping)
+**File:** `rob6323_go2_env.py`  
+**Why:** Use classical foot placement logic to guide RL under velocity commands.  
+**Changes:**
+- Added gait clock signals (sin wave) to observations
+- Desired contact state computation
+- Foot placement reward via Raibert-style target
+
+---
+
+### Part 5 — Refined Reward Function (Body Stabilization)
+**File:** `rob6323_go2_env.py`  
+**Why:** Penalize undesirable body states.  
+**Added penalties:**
+- `orient`: body tilt
+- `lin_vel_z`: vertical bounce
+- `dof_vel`: high joint velocity
+- `ang_vel_xy`: roll/pitch angular velocity
+
+---
+
+### Part 6 — Advanced Foot Interaction (Swing/Contact Timing)
+**File:** `rob6323_go2_env.py`  
+**Why:** Encourage correct foot lift + contact timing.  
+**Changes:**
+- `feet_clearance`: penalize feet too close to ground during swing
+- `tracking_contacts_shaped_force`: penalize swing-phase contact forces
+
+---
+
+### Bonus — Actuator Friction Model (vivek branch)
+**File:** `rob6323_go2_env.py`  
+**Why:** Reduce sim-to-real gap by modeling friction.  
+**Change:** Stiction + viscous friction + per-episode randomization.
+
+\[
+\tau_{fric}=F_s \tanh(\dot{q}/0.1)+\mu_v\dot{q},\quad \tau=\tau_{PD}-\tau_{fric}
+\]
+
+Randomization:
+- \(F_s \sim U(0, 2.5)\)
+- \(\mu_v \sim U(0, 0.3)\)
+
+---
+
+## Terrain Branch Changes (Rough Terrain)
+**Files:** `rob6323_go2_env.py`, `rob6323_go2_env_cfg.py`  
+**Why:** Enable rough terrain traversal.  
+**Changes:**
+- RayCaster height scanner for terrain perception
+- `height_data` added to observations (**187 ray samples**)
+- Terrain-relative spawn logic
+- Applied best tuned params from flat setup
+
+---
+
+## Best Hyperparameters (from our best run)
+
+| Parameter | Value |
+|----------|------:|
+| `lin_vel_reward_scale` | 2.0 |
+| `yaw_rate_reward_scale` | 1.0 |
+| `action_rate_reward_scale` | -0.1 |
+| `raibert_heuristic_reward_scale` | -4.5 |
+| `orient_reward_scale` | -5.5 |
+| `lin_vel_z_reward_scale` | -2.05 |
+| `dof_vel_reward_scale` | -0.0005 |
+| `ang_vel_xy_reward_scale` | -0.1 |
+| `feet_clearance_reward_scale` | -10.5 |
+| `tracking_contacts_shaped_force_reward_scale` | 5.0 |
+
+---
+
+# How to Run (3 Procedures)
+
+Below are **three distinct run procedures** with **path placeholders**.  
+Replace placeholders like `<NETID>`, `<REPO_ROOT>`, `<SCENARIO>`, `<JOB_ID>`, `<LOG_DIR>`.
+
+---
+
+## Procedure A — Local Run (Quick sanity checks)
+Use this for short debug runs (small steps, quick verify env works).
+
+### 1) Clone + enter repo
+```bash
+git clone git@github.com:Nishant-ZFYII/rob6323_go2_project.git
+cd <REPO_ROOT>/rob6323_go2_project
+
+
