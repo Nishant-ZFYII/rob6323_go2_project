@@ -170,16 +170,16 @@ Students should only edit README.md below this line.
 
 # ROB6323 Go2 Locomotion Project (Isaac Lab): Results
 
-Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping and low-level control changes and multiple experiment scenarios (flat and terrain).
+Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping and low-level control changes in multiple experiment scenarios (flat and terrain).
 
 ## Team Members
 Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
 
 ---
 ## Implementations
--
--
--
+- Extend the reward beyond velocity tracking by adding terms for posture stabilization, foot clearance, foot slip minimization, smooth actions, contact regularization, and collision penalties.
+- Use domain randomization to improve robustness across speeds, disturbances, and ground properties.
+- Benchmark with metrics like velocity tracking error, base orientation error, slip count, episode length, and energy proxies to guide iteration.
 
 ---
 ## Running the model
@@ -238,17 +238,17 @@ Refer to above instructions.
 ---
 
 ## Results: Plots and Videos
-**1. Smoothened walking and trotting**
+**1. Smooth trotting**
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
 
-![Baseline](docs/baseline.gif)
+![Baseline](docs/smoothtrotting.gif)
 
 
 **2. Trotting with Friction**
 ![Friction](docs/img/burst_squeue_example.png)
 
-![Friction](docs/terrain_best.gif)
+![Friction](docs/friction.gif)
 
 **3. Rough Terrain**
 ![Rough Terrain](docs/img/burst_squeue_example.png)
