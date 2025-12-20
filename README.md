@@ -302,6 +302,10 @@ Randomization:
 ## Results: Plots and Videos
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
+<p align="center">
+  <iframe src="https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing?autoplay=1&mute=1&controls=0" width="640" height="360" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</p>
+
 [![Baseline](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
 
 
