@@ -202,11 +202,11 @@ git checkout master
   ```
 ./train_flat_terrain.sh
 ```
-  **(ii) Flat terrain with friction**
+**(ii) Flat terrain with friction**
     ```
   ./train_flat_terrain_fric.sh
-    ```
-  **(iii) Rough Terrain**
+     ```
+**(iii) Rough Terrain**
     ```
   ./train_rough_terrain.sh
     ```
@@ -251,7 +251,6 @@ Rough Terrain
 
 **1. Smooth trotting**
 
-This is the baseline results as given from the tutorials.
 
 ![Smooth Trotting](docs/smoothtrotting.gif)
 
