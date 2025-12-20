@@ -304,7 +304,7 @@ This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
 ## Policy Rollout Video (Flat Terrain)
 
-[![Go2 Locomotion Video](results/videos/flat_walk_thumbnail.png)](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view)
+[![Go2 Locomotion Video](docs/baseline.gif)
 
 
 [![Baseline](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
