@@ -214,9 +214,8 @@ git checkout master
 Train on Greene HPC
 ```./train.sh```
 Checkout job status ```ssh burst "squeue -u $USER"```
+View results using instructions given above.
 
-**D. View Results**
-Refer to above instructions.
 ---
 
 ## Best Hyperparameters
