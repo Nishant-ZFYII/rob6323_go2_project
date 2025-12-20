@@ -177,9 +177,9 @@ Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
 
 ---
 ## Implementations
-- Extend the reward beyond velocity tracking by adding terms for posture stabilization, foot clearance, foot slip minimization, smooth actions, contact regularization, and collision penalties.
-- Use domain randomization to improve robustness across speeds, disturbances, and ground properties.
-- Benchmark with metrics like velocity tracking error, base orientation error, slip count, episode length, and energy proxies to guide iteration.
+- Extended the rewards beyond velocity tracking by adding terms for posture stabilization, foot clearance, foot slip minimization, smooth actions, contact regularization, and collision penalties.
+- Used domain randomization to improve robustness across speeds, disturbances, and ground properties.
+- Created benchmark with metrics like velocity tracking error, base orientation error, slip count, episode length, and energy proxies to guide iteration.
 
 ---
 ## Running the model
@@ -239,16 +239,17 @@ Refer to above instructions.
 
 ## Results: Plots and Videos
 **1. Smooth trotting**
-This is the baseline results as given from the tutorials.
-![Baseline](docs/img/burst_squeue_example.png)
 
-![Baseline](docs/smoothtrotting.gif)
+This is the baseline results as given from the tutorials.
+![Smooth Trotting](docs/img/burst_squeue_example.png)
+
+![Smooth Trotting](docs/smoothtrotting.gif)
 
 
 **2. Trotting with Friction**
 ![Friction](docs/img/burst_squeue_example.png)
 
-![Friction](docs/friction.gif)
+![Friction](docs/withfriction.gif)
 
 **3. Rough Terrain**
 ![Rough Terrain](docs/img/burst_squeue_example.png)
