@@ -176,6 +176,8 @@ Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with r
 
 ## Team Members
 Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
+---
+## Implementations:
 
 ---
 
@@ -185,103 +187,32 @@ Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
 
 > **Rule of thumb:**
 >   pick a scenario
->   use that scenario’s `rob6323_go2_env*.py` and that are called in its `train.sh/train.slurm`
+>   use that scenario’s `rob6323_go2_env.py` and `rob6323_go2_env_cfg.py` that are called in its `train.sh/train.slurm`
 >   train 
 >   log 
 >     videos
 >     tensorboard for plots
 
+---
+## How to reproduce
+A. Clone and Setup
+```
+git clone git@github.com:Nishant-ZFYII/rob6323_go2_project.git
+cd rob6323_go2_project
+git checkout master
+```
 
+B. Train on Greene HPC
+```./train.sh```
+
+C. View Results
+```
+rsync -avz user@greene:˜/rob6323_go2_project/logs/<JOB_ID>/ ./logs/<JOB_ID>/
+tensorboard --logdir=logs
+```
 ---
 
-## Major Changes (What we implemented)
-
-### Part 1 — Action Rate Penalties (Smoother Actions)
-**File:** `rob6323_go2_env.py`  
-**Why:** Penalize jerky motions for smoother locomotion.  
-**Change:** Added first + second derivative action penalties using a 3-step action history.
-
-\[
-r_{\text{action\_rate}}=\sum (a_t-a_{t-1})^2 + \sum (a_t-2a_{t-1}+a_{t-2})^2
-\]
-
----
-
-### Part 2 — Low-Level PD Controller (Explicit Torque Control)
-**Files:** `rob6323_go2_env.py`, `rob6323_go2_env_cfg.py`  
-**Why:** Replace implicit actuator with explicit torque control (better sim-to-real).  
-**Change:** PD controller with `Kp=20.0`, `Kd=0.5`.
-
-\[
-\tau = K_p(q_{des}-q) - K_d \dot{q}
-\]
-
----
-
-### Part 3 — Early Stopping (Fall Termination)
-**File:** `rob6323_go2_env.py`  
-**Why:** End episodes early when the robot falls to speed learning.  
-**Change:** Added base height termination at **0.20 m**.
-
----
-
-### Part 4 — Raibert Heuristic (Gait Shaping)
-**File:** `rob6323_go2_env.py`  
-**Why:** Use classical foot placement logic to guide RL under velocity commands.  
-**Changes:**
-- Added gait clock signals (sin wave) to observations
-- Desired contact state computation
-- Foot placement reward via Raibert-style target
-
----
-
-### Part 5 — Refined Reward Function (Body Stabilization)
-**File:** `rob6323_go2_env.py`  
-**Why:** Penalize undesirable body states.  
-**Added penalties:**
-- `orient`: body tilt
-- `lin_vel_z`: vertical bounce
-- `dof_vel`: high joint velocity
-- `ang_vel_xy`: roll/pitch angular velocity
-
----
-
-### Part 6 — Advanced Foot Interaction (Swing/Contact Timing)
-**File:** `rob6323_go2_env.py`  
-**Why:** Encourage correct foot lift + contact timing.  
-**Changes:**
-- `feet_clearance`: penalize feet too close to ground during swing
-- `tracking_contacts_shaped_force`: penalize swing-phase contact forces
-
----
-
-### Bonus — Actuator Friction Model (vivek branch)
-**File:** `rob6323_go2_env.py`  
-**Why:** Reduce sim-to-real gap by modeling friction.  
-**Change:** Stiction + viscous friction + per-episode randomization.
-
-\[
-\tau_{fric}=F_s \tanh(\dot{q}/0.1)+\mu_v\dot{q},\quad \tau=\tau_{PD}-\tau_{fric}
-\]
-
-Randomization:
-- \(F_s \sim U(0, 2.5)\)
-- \(\mu_v \sim U(0, 0.3)\)
-
----
-
-## Terrain Branch Changes (Rough Terrain)
-**Files:** `rob6323_go2_env.py`, `rob6323_go2_env_cfg.py`  
-**Why:** Enable rough terrain traversal.  
-**Changes:**
-- RayCaster height scanner for terrain perception
-- `height_data` added to observations (**187 ray samples**)
-- Terrain-relative spawn logic
-- Applied best tuned params from flat setup
-
----
-
-## Best Hyperparameters (from our best run)
+## Best Hyperparameters
 
 | Parameter | Value |
 |----------|------:|
@@ -297,10 +228,10 @@ Randomization:
 | `tracking_contacts_shaped_force_reward_scale` | 5.0 |
 
 
---
+---
 
 ## Results: Plots and Videos
-#1. Baseline
+##1. Smoothened walking and trouting
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
 
@@ -308,10 +239,14 @@ This is the baseline results as given from the tutorials.
 
 ![if we want to link vid](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
 
-
-#4. Rough Terrain
+##2. Trouting with Friction 
 ![Terrain](docs/img/burst_squeue_example.png)
 
-[![Terrain](docs/terrain_best.gif)
+![Terrain](docs/terrain_best.gif)
+
+##3. Rough Terrain
+![Terrain](docs/img/burst_squeue_example.png)
+
+![Terrain](docs/terrain_best.gif)
 
 
