@@ -300,15 +300,18 @@ Randomization:
 --
 
 ## Results: Plots and Videos
+#1. Baseline
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
-## Policy Rollout Video (Flat Terrain)
 
-[![Go2 Locomotion Video](docs/baseline.gif)
+![Baseline](docs/baseline.gif)
 
-
-[![Baseline](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
+![if we want to link vid](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
 
 
+#4. Rough Terrain
+![Terrain](docs/img/burst_squeue_example.png)
+
+[![Terrain](docs/terrain_best.gif)
 
 
