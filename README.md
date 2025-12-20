@@ -302,7 +302,7 @@ Randomization:
 ## Results: Plots and Videos
 This is the baseline results as given from the tutorials.
 ![Baseline](docs/img/burst_squeue_example.png)
-[![Baseline][(https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)]
+[![Baseline](https://drive.google.com/file/d/1NQQbY4zN8GFGdi2O9tEg8VeWpplFmvd8/view?usp=sharing)
 
 
 
