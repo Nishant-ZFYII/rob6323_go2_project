@@ -237,21 +237,20 @@ View results using instructions given above.
 ---
 
 ## Results: Plots and Videos
+![Training Policies](docs/training_policies.png)
+![Rough Terrain](docs/rough_terrain.png)
 **1. Smooth trotting**
 
 This is the baseline results as given from the tutorials.
-![Smooth Trotting](docs/img/burst_squeue_example.png)
 
 ![Smooth Trotting](docs/smoothtrotting.gif)
 
 
 **2. Trotting with Friction**
-![Friction](docs/img/burst_squeue_example.png)
 
 ![Friction](docs/withfriction.gif)
 
 **3. Rough Terrain**
-![Rough Terrain](docs/img/burst_squeue_example.png)
 
 ![Rough Terrain](docs/terrain_best.gif)
 
