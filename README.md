@@ -165,3 +165,103 @@ The suggested way to inspect these logs is via the Open OnDemand web interface:
 
 ---
 Students should only edit README.md below this line.
+
+---
+
+# ROB6323 Go2 Locomotion Project (Isaac Lab): Results
+
+Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping and low-level control changes in multiple experiment scenarios (flat and terrain).
+
+## Team Members
+Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
+
+---
+## Implementations
+- Extended the rewards beyond velocity tracking by adding terms for posture stabilization, foot clearance, foot slip minimization, smooth actions, contact regularization, and collision penalties.
+- Used domain randomization to improve robustness across speeds, disturbances, and ground properties.
+- Created benchmark with metrics like velocity tracking error, base orientation error, slip count, episode length, and energy proxies to guide iteration.
+
+---
+## Running the model
+**A. Prerequisites: Clone and Setup**
+```
+cd $HOME
+git clone git@github.com:Nishant-ZFYII/rob6323_go2_project.git
+```
+**B. Install environment**
+```
+cd $HOME/rob6323_go2_project
+./install.sh
+```
+**C. Launch Training**
+```
+cd rob6323_go2_project
+git checkout master
+```
+  **(i) Flat terrain**
+  ```
+./train_flat_terrain.sh
+```
+  **(ii) Flat terrain with friction**
+    ```
+  ./train_flat_terrain_fric.sh
+    ```
+  **(iii) Rough Terrain**
+    ```
+  ./train_rough_terrain.sh
+    ```
+
+Train on Greene HPC
+```./train.sh```
+Checkout job status ```ssh burst "squeue -u $USER"```
+View results using instructions given above.
+
+---
+
+## Best Hyperparameters
+
+| Parameter | Value |
+|----------|------:|
+| `lin_vel_reward_scale` | 2.0 |
+| `yaw_rate_reward_scale` | 1.0 |
+| `action_rate_reward_scale` | -0.1 |
+| `raibert_heuristic_reward_scale` | -4.5 |
+| `orient_reward_scale` | -5.5 |
+| `lin_vel_z_reward_scale` | -2.05 |
+| `dof_vel_reward_scale` | -0.0005 |
+| `ang_vel_xy_reward_scale` | -0.1 |
+| `feet_clearance_reward_scale` | -10.5 |
+| `tracking_contacts_shaped_force_reward_scale` | 5.0 |
+
+
+---
+
+## Results: Plots and Videos
+
+Training Policies
+
+
+![Training Policies](docs/training_policies.png)
+
+Rough Terrain
+
+
+![Rough Terrain](docs/rough_terrain.png)
+
+
+**1. Smooth trotting**
+
+This is the baseline results as given from the tutorials.
+
+![Smooth Trotting](docs/smoothtrotting.gif)
+
+
+**2. Trotting with Friction**
+
+![Friction](docs/withfriction.gif)
+
+**3. Rough Terrain**
+
+![Rough Terrain](docs/terrain_best.gif)
+
+
