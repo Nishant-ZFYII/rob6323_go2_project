@@ -172,6 +172,8 @@ Students should only edit README.md below this line.
 
 Reinforcement learning locomotion for the Unitree Go2 robot in Isaac Lab, with reward shaping and low-level control changes in multiple experiment scenarios (flat and terrain).
 
+![Unitree Go2 quadruped](docs/go2_dog.jpeg)
+
 ## Team Members
 Vivek Mattam, Nishant Pushparaju, Samyu Kamtam
 
@@ -262,5 +264,15 @@ Rough Terrain
 **3. Rough Terrain**
 
 ![Rough Terrain](docs/terrain_best.gif)
+
+
+**4. Trained policy rollout**
+
+![Trained policy rollout](docs/policy_demo.gif)
+
+
+**5. MuJoCo simulation**
+
+![MuJoCo simulation](docs/mujoco_sim.gif)
 
 
